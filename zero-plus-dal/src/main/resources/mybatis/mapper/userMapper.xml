@@ -7,6 +7,7 @@
         <result column="id" property="id"/>
         <result column="user_id" property="userId"/>
         <result column="username" property="username"/>
+        <result column="portrait_url" property="portraitUrl"/>
     </resultMap>
 
 
@@ -19,4 +20,12 @@
     <select id="selectUserByUserId" resultMap="UserMap" parameterType="String">
         select * from users where user_id=#{userId}
     </select>
+
+    <update id="update" parameterType="com.zpc.common.dataobject.UserDO">
+        update users set gmt_modified=now()
+        <if test="portraitUrl!=null">
+            ,portrait_url=#{portraitUrl}
+        </if>
+        where user_id=#{userId}
+    </update>
 </mapper>

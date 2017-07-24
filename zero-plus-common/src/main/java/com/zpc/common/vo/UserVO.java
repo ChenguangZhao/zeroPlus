@@ -17,6 +17,8 @@ public class UserVO {
 
     private String username;
 
+    private String portraitUrl;
+
     private List<ProductsVO> productsVOS;
 
     public Long getId() {
@@ -51,12 +53,21 @@ public class UserVO {
         this.productsVOS = productsVOS;
     }
 
+    public String getPortraitUrl() {
+        return portraitUrl;
+    }
+
+    public void setPortraitUrl(String portraitUrl) {
+        this.portraitUrl = portraitUrl;
+    }
+
     @Override
     public String toString() {
         return "UserVO{" +
             "id=" + id +
             ", userId='" + userId + '\'' +
             ", username='" + username + '\'' +
+            ", portraitUrl='" + portraitUrl + '\'' +
             ", productsVOS=" + productsVOS +
             '}';
     }

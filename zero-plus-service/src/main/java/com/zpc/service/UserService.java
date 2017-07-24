@@ -2,6 +2,7 @@ package com.zpc.service;
 
 import java.util.List;
 
+import com.zpc.common.exception.ServiceException;
 import com.zpc.common.vo.UserVO;
 
 /**
@@ -22,4 +23,9 @@ public interface UserService {
      * @return
      */
     UserVO queryUserByUserId(String userId);
+
+    /**
+     * @param userVO
+     */
+    void save(UserVO userVO) throws ServiceException;
 }

@@ -9,6 +9,10 @@
 		http://www.springframework.org/schema/aop
          http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
 
-    <!--dal xml -->
+    <!-- xml -->
+    <import resource="classpath:spring-biz.xml"/>
+
     <import resource="classpath:spring-dal.xml"/>
+
+
 </beans>

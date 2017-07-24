@@ -1,7 +1,7 @@
 package com.zpc.common.dataobject;
 
 import com.zpc.common.vo.UserVO;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * @Title:
@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @version:1.1.0
  * @date 2017/07/20
  */
-@Mapper
+@Repository
 public class UserDO extends UserVO {
 
     private Integer isDeteled;

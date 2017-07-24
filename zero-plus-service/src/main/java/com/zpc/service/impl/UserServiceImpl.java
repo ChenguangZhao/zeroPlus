@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.zpc.common.dataobject.UserDO;
+import com.zpc.common.exception.ServiceException;
 import com.zpc.common.vo.ProductsVO;
 import com.zpc.common.vo.UserVO;
 import com.zpc.dal.UserDao;
@@ -56,5 +57,25 @@ public class UserServiceImpl implements UserService {
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(userDO, userVO);
         return userVO;
+    }
+
+    /**
+     * @param userVO
+     */
+    @Override
+    public void save(UserVO userVO) throws ServiceException {
+        if (userVO == null) {
+            throw new ServiceException("user vo is null");
+        }
+        UserDO userDO = new UserDO();
+        BeanUtils.copyProperties(userVO, userDO);
+
+        UserDO existUserDO = userDao.selectUserByUserId(userVO.getUserId());
+
+        if (existUserDO != null) {
+            userDao.update(userDO);
+        } else {
+            userDao.insert(userDO);
+        }
     }
 }

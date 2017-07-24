@@ -9,7 +9,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>zero-plus-web</artifactId>
-    <!--<packaging>jar</packaging>-->
+    <packaging>war</packaging>
 
     <name>zero-plus-web</name>
     <url>http://maven.apache.org</url>
@@ -29,6 +29,11 @@
             <groupId>com.zpc</groupId>
             <artifactId>zero-plus-service</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
 
     </dependencies>

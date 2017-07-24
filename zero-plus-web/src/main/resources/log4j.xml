@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+                     threshold="null" debug="null">
+
+    <!-- [公共Appender] -->
+    <appender name="DEFAULT-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/Users/chenguang.zcg/logs/zeroPlus/logs/default.log"/>
+        <param name="Append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyy-MM-dd HH:mm:ss} %-5p %c{1} - %m%n"/>
+        </layout>
+    </appender>
+
+    <!-- [错误日志APPENDER] -->
+    <appender name="ERROR-APPENDER" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/Users/chenguang.zcg/logs/zeroPlus/logs/error.log"/>
+        <param name="Append" value="true"/>
+        <param name="encoding" value="UTF-8"/>
+        <param name="threshold" value="error"/>
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyy-MM-dd HH:mm:ss} %-5p %c{1} - %m%n"/>
+        </layout>
+    </appender>
+
+
+    <!-- Root Logger -->
+    <root>
+        <level value="INFO"></level>
+        <appender-ref ref="DEFAULT-APPENDER"/>
+        <appender-ref ref="ERROR-APPENDER"/>
+    </root>
+</log4j:configuration>  

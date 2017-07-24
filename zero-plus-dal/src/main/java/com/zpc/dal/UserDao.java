@@ -25,4 +25,14 @@ public interface UserDao {
      * @return
      */
     UserDO selectUserByUserId(String userId);
+
+    /**
+     * @param userDO
+     */
+    void update(UserDO userDO);
+
+    /**
+     * @param userDO
+     */
+    void insert(UserDO userDO);
 }
