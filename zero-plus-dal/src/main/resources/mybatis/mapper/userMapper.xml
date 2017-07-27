@@ -7,7 +7,12 @@
         <result column="id" property="id"/>
         <result column="user_id" property="userId"/>
         <result column="username" property="username"/>
+        <result column="gender" property="gender"/>
+        <result column="email" property="email"/>
+        <result column="first_name" property="firstName"/>
+        <result column="last_name" property="lastName"/>
         <result column="portrait_url" property="portraitUrl"/>
+        <result column="birthday" property="birthday"/>
     </resultMap>
 
 
@@ -26,6 +31,21 @@
         <if test="portraitUrl!=null">
             ,portrait_url=#{portraitUrl}
         </if>
+        <if test="email!=null">
+            ,email=#{email}
+        </if>
+        <if test="gender!=null">
+            ,gender=#{gender}
+        </if>
+        <if test="birthday!=null">
+            ,birthday=#{birthday}
+        </if>
         where user_id=#{userId}
     </update>
+
+    <insert id="insert" parameterType="com.zpc.common.dataobject.UserDO">
+        insert into users (username,user_id,portrait_url,email,gender,last_name,first_name)
+        VALUE
+        (#{username},#{userId},#{portraitUrl},#{email},#{gender},#{lastName},#{firstName})
+    </insert>
 </mapper>

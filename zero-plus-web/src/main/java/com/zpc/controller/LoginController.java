@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import com.alibaba.fastjson.JSONObject;
 
 import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion.User;
+import com.zpc.common.exception.ServiceException;
 import com.zpc.common.result.AjaxResult;
 import com.zpc.common.utils.HttpUtils;
 import com.zpc.common.vo.UserVO;
@@ -42,6 +43,10 @@ public class LoginController {
     public AjaxResult queryProductById(String callback, HttpServletRequest request,
                                        @RequestParam(value = "name") String username,
                                        @RequestParam(value = "id") String userId,
+                                       @RequestParam(value = "gender") String gender,
+                                       @RequestParam(value = "email", required = false) String email,
+                                       @RequestParam(value = "first_name", required = false) String firstName,
+                                       @RequestParam(value = "last_name", required = false) String lastName,
                                        @RequestParam(value = "accessToken") String accessToken) {
         try {
             String url = FACEBOOK_URL + accessToken;
@@ -57,6 +62,10 @@ public class LoginController {
                         UserVO userVO = new UserVO();
                         userVO.setUserId(userId);
                         userVO.setUsername(username);
+                        userVO.setEmail(email);
+                        userVO.setGender(gender);
+                        userVO.setFirstName(firstName);
+                        userVO.setLastName(lastName);
 
                         //facebook用户与系统用户
                         userVO = checkUer(userVO);
@@ -75,6 +84,7 @@ public class LoginController {
             return AjaxResult.errResult(callback, "服务器异常");
 
         } catch (Exception e) {
+            e.printStackTrace();
             return AjaxResult.errResult(callback, e.getMessage());
         }
     }
@@ -84,13 +94,14 @@ public class LoginController {
      *
      * @param userVO
      */
-    private UserVO checkUer(UserVO userVO) {
+    private UserVO checkUer(UserVO userVO) throws ServiceException {
         UserVO existUserVO = userService.queryUserByUserId(userVO.getUserId());
         if (existUserVO == null) {
             //新用户Facebook登录
             System.out.println("新用户Facebook登录");
             System.out.println(userVO);
-            return existUserVO;
+            userService.save(userVO);
+            return userVO;
 
         } else {
             System.out.println("老用户Facebook登录");
@@ -113,8 +124,25 @@ public class LoginController {
             UserVO userVO = (UserVO)obj;
             return AjaxResult.succResult(callback, userVO);
         } else {
-            return AjaxResult.succResult(callback);
+            UserVO userVO = userService.queryUserByUserId("107535889893405");
+            return AjaxResult.succResult(callback,userVO);
         }
 
     }
+
+    /**
+     * logout
+     *
+     * @param callback
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("logout.do")
+    public AjaxResult logout(String callback, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.setAttribute("user", null);
+        return AjaxResult.succResult(callback);
+    }
+
 }

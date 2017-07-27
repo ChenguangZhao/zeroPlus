@@ -54,6 +54,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO queryUserByUserId(String userId) {
         UserDO userDO = userDao.selectUserByUserId(userId);
+        if(userDO==null){
+            return null;
+        }
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(userDO, userVO);
         return userVO;

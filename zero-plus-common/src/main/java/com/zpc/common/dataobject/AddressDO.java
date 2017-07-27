@@ -1,17 +1,15 @@
 package com.zpc.common.dataobject;
 
-import com.zpc.common.vo.UserVO;
-import org.springframework.stereotype.Repository;
+import com.zpc.common.vo.AddressVO;
 
 /**
  * @Title:
  * @Description:
  * @author: chenguang.zcg
  * @version:1.1.0
- * @date 2017/07/20
+ * @date 2017/07/27
  */
-@Repository
-public class UserDO extends UserVO {
+public class AddressDO extends AddressVO {
 
     private Integer isDeleted;
 
@@ -25,7 +23,7 @@ public class UserDO extends UserVO {
 
     @Override
     public String toString() {
-        return "UserDO{" +
+        return "AddressDO{" +
             "isDeleted=" + isDeleted +
             '}';
     }

@@ -6,6 +6,7 @@ import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.zpc.common.exception.ServiceException;
 import com.zpc.common.result.AjaxResult;
 import com.zpc.common.vo.UserVO;
 import com.zpc.service.UserService;
@@ -93,7 +94,7 @@ public class UserController {
         try {
             FileInputStream inputStream = new FileInputStream(file);
             byte[] data = new byte[(int)file.length()];
-            int length = inputStream.read(data);
+            inputStream.read(data);
             inputStream.close();
 
             response.setContentType("image/png");
@@ -104,6 +105,25 @@ public class UserController {
             stream.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * @param callback
+     * @param userVO
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("saveBaseInfo.do")
+    public AjaxResult saveBaseInfo(String callback,
+                                   UserVO userVO) {
+        try {
+            userService.save(userVO);
+            return AjaxResult.succResult(callback);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+            return AjaxResult.errResult(callback, e.getMessage());
+
         }
     }
 }

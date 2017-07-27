@@ -11,20 +11,20 @@ import com.zpc.common.vo.ProductsVO;
  */
 public class ProductsDO extends ProductsVO {
 
-    private Integer isDeteled;
+    private Integer isDeleted;
 
-    public Integer getIsDeteled() {
-        return isDeteled;
+    public Integer getIsDeleted() {
+        return isDeleted;
     }
 
-    public void setIsDeteled(Integer isDeteled) {
-        this.isDeteled = isDeteled;
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     @Override
     public String toString() {
         return "ProductsDO{" +
-            "isDeteled=" + isDeteled +
+            "isDeleted=" + isDeleted +
             '}';
     }
 }
