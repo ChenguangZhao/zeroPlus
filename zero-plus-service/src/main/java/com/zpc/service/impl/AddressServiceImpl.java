@@ -58,7 +58,31 @@ public class AddressServiceImpl implements AddressService {
             //update
             addressDao.update(addressDO);
         } else {
+            AddressVO defaultAddressVO = queryDefaultAddressByUserId(addressDO.getUserId());
+            if (defaultAddressVO == null) {
+                addressDO.setIsDefault(1);
+            } else {
+                addressDO.setIsDefault(0);
+            }
             addressDao.insert(addressDO);
+        }
+    }
+
+    /**
+     * 查询默认地址
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public AddressVO queryDefaultAddressByUserId(String userId) {
+        AddressDO addressDO = addressDao.selectDefaultAddressByUserId(userId);
+        if (addressDO == null) {
+            return null;
+        } else {
+            AddressVO addressVO = new AddressVO();
+            BeanUtils.copyProperties(addressDO, addressVO);
+            return addressVO;
         }
     }
 

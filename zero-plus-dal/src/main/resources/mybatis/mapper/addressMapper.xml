@@ -13,6 +13,7 @@
         <result column="state" property="state"/>
         <result column="zip_code" property="zipCode"/>
         <result column="phone_number" property="phoneNumber"/>
+        <result column="is_default" property="isDefault"/>
         <result column="is_deleted" property="isDeleted"/>
     </resultMap>
 
@@ -22,10 +23,14 @@
 
     <insert id="insert" parameterType="com.zpc.common.dataobject.AddressDO">
         INSERT INTO address
-        (user_id,country,full_name,street_address,city,state,zip_code,phone_number)
+        (user_id,country,full_name,street_address,city,state,zip_code,phone_number,is_default)
         VALUE
-        (#{userId},#{country},#{fullName},#{streetAddress},#{city},#{state},#{zipCode},#{phoneNumber})
+        (#{userId},#{country},#{fullName},#{streetAddress},#{city},#{state},#{zipCode},#{phoneNumber},#{isDefault})
     </insert>
+
+    <select id="selectDefaultAddressByUserId" parameterType="String" resultMap="AddressMap">
+        SELECT * FROM address WHERE user_id=#{userId} and is_deleted=0 and is_default=1
+    </select>
 
     <update id="update" parameterType="com.zpc.common.dataobject.AddressDO">
         update address set gmt_modified=now()
@@ -49,6 +54,9 @@
         </if>
         <if test="phoneNumber!=null">
             ,phone_number=#{phoneNumber}
+        </if>
+        <if test="isDefault!=null">
+            ,is_default=#{isDefault}
         </if>
         <if test="isDeleted!=null">
             ,is_deleted=#{isDeleted}

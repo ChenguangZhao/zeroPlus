@@ -29,4 +29,10 @@ public interface AddressService {
      * @param id
      */
     void deleteAddress(Long id);
+
+    /**
+     * @param userId
+     * @return
+     */
+    AddressVO queryDefaultAddressByUserId(String userId);
 }

@@ -29,6 +29,8 @@ public class UserVO {
 
     private String birthday;
 
+    private String sourceSystem;
+
     private List<ProductsVO> productsVOS;
 
     public Long getId() {
@@ -111,6 +113,14 @@ public class UserVO {
         this.birthday = birthday;
     }
 
+    public String getSourceSystem() {
+        return sourceSystem;
+    }
+
+    public void setSourceSystem(String sourceSystem) {
+        this.sourceSystem = sourceSystem;
+    }
+
     @Override
     public String toString() {
         return "UserVO{" +
@@ -123,6 +133,7 @@ public class UserVO {
             ", gender='" + gender + '\'' +
             ", email='" + email + '\'' +
             ", birthday='" + birthday + '\'' +
+            ", sourceSystem='" + sourceSystem + '\'' +
             ", productsVOS=" + productsVOS +
             '}';
     }

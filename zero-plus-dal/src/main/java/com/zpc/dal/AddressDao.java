@@ -30,4 +30,10 @@ public interface AddressDao {
      * @param addressDO
      */
     void insert(AddressDO addressDO);
+
+    /**
+     * @param userId
+     * @return
+     */
+    AddressDO selectDefaultAddressByUserId(String userId);
 }

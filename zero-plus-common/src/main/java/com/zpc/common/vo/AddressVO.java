@@ -27,6 +27,8 @@ public class AddressVO {
 
     private String phoneNumber;
 
+    private Integer isDefault;
+
     public Long getId() {
         return id;
     }
@@ -99,6 +101,14 @@ public class AddressVO {
         this.phoneNumber = phoneNumber;
     }
 
+    public Integer getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(Integer isDefault) {
+        this.isDefault = isDefault;
+    }
+
     @Override
     public String toString() {
         return "AddressVO{" +
@@ -111,6 +121,7 @@ public class AddressVO {
             ", state='" + state + '\'' +
             ", zipCode='" + zipCode + '\'' +
             ", phoneNumber='" + phoneNumber + '\'' +
+            ", isDefault=" + isDefault +
             '}';
     }
 }

@@ -4,11 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.zpc.common.constants.Keys;
 import com.zpc.common.exception.ServiceException;
 import com.zpc.common.result.AjaxResult;
 import com.zpc.common.vo.UserVO;
+import com.zpc.service.LoginService;
 import com.zpc.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +36,8 @@ public class UserController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    LoginService loginService;
 
     private final static String PATH
         = "/Users/chenguang.zcg/IdeaProjects/zeroPlus/zero-plus-web/src/main/webapp/image/";
@@ -115,12 +121,18 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping("saveBaseInfo.do")
-    public AjaxResult saveBaseInfo(String callback,
+    public AjaxResult saveBaseInfo(String callback, HttpServletRequest request, HttpServletResponse response,
                                    UserVO userVO) {
         try {
             userService.save(userVO);
+
+            //更新session和cookie
+            HttpSession session = request.getSession();
+            session.setAttribute(Keys.SESSION_KEY, userVO);
+            loginService.saveCookie(userVO, response);
+
             return AjaxResult.succResult(callback);
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return AjaxResult.errResult(callback, e.getMessage());
 
