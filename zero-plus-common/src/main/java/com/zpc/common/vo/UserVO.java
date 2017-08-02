@@ -1,5 +1,6 @@
 package com.zpc.common.vo;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,6 +31,8 @@ public class UserVO {
     private String birthday;
 
     private String sourceSystem;
+
+    private Date joinTime;
 
     private List<ProductsVO> productsVOS;
 
@@ -121,6 +124,14 @@ public class UserVO {
         this.sourceSystem = sourceSystem;
     }
 
+    public Date getJoinTime() {
+        return joinTime;
+    }
+
+    public void setJoinTime(Date joinTime) {
+        this.joinTime = joinTime;
+    }
+
     @Override
     public String toString() {
         return "UserVO{" +
@@ -134,6 +145,7 @@ public class UserVO {
             ", email='" + email + '\'' +
             ", birthday='" + birthday + '\'' +
             ", sourceSystem='" + sourceSystem + '\'' +
+            ", joinTime=" + joinTime +
             ", productsVOS=" + productsVOS +
             '}';
     }

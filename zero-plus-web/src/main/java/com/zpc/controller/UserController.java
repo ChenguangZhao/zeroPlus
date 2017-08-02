@@ -56,13 +56,15 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping("uploadHeadPortrait.do")
-    public AjaxResult uploadHeadPortrait(String callback,
-                                         @RequestParam(value = "userId", required = false) String userId,
+    public AjaxResult uploadHeadPortrait(String callback, HttpServletRequest request,
+                                         //@RequestParam(value = "userId", required = false) String userId,
                                          MultipartFile multipartFile) {
         try {
+
             if (!multipartFile.isEmpty()) {
+                UserVO userVO = loginService.queryLoginUser(request);
                 String fileName = multipartFile.getOriginalFilename();
-                fileName = userId + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+                fileName = userVO.getUserId() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
                 String filePath = PATH
                     + fileName;
 
@@ -70,8 +72,6 @@ public class UserController {
 
                 multipartFile.transferTo(file);
 
-                UserVO userVO = new UserVO();
-                userVO.setUserId(userId);
                 userVO.setPortraitUrl(fileName);
                 userService.save(userVO);
             }

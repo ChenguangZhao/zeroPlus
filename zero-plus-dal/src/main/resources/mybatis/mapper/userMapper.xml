@@ -14,6 +14,7 @@
         <result column="portrait_url" property="portraitUrl"/>
         <result column="birthday" property="birthday"/>
         <result column="source_system" property="sourceSystem"/>
+        <result column="join_time" property="joinTime"/>
     </resultMap>
 
 
@@ -45,8 +46,8 @@
     </update>
 
     <insert id="insert" parameterType="com.zpc.common.dataobject.UserDO">
-        insert into users (username,user_id,portrait_url,email,gender,last_name,first_name,source_system)
+        insert into users (username,user_id,portrait_url,email,gender,last_name,first_name,source_system,join_time)
         VALUE
-        (#{username},#{userId},#{portraitUrl},#{email},#{gender},#{lastName},#{firstName},#{sourceSystem})
+        (#{username},#{userId},#{portraitUrl},#{email},#{gender},#{lastName},#{firstName},#{sourceSystem},#{joinTime})
     </insert>
 </mapper>

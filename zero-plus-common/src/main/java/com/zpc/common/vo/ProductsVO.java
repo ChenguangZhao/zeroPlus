@@ -17,6 +17,8 @@ public class ProductsVO {
 
     private String description;
 
+    private String pictureUrl;
+
     private UserVO userVO;
 
     public Long getId() {
@@ -59,6 +61,14 @@ public class ProductsVO {
         this.userVO = userVO;
     }
 
+    public String getPictureUrl() {
+        return pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
+    }
+
     @Override
     public String toString() {
         return "ProductsVO{" +
@@ -66,6 +76,7 @@ public class ProductsVO {
             ", userId='" + userId + '\'' +
             ", name='" + name + '\'' +
             ", description='" + description + '\'' +
+            ", pictureUrl='" + pictureUrl + '\'' +
             ", userVO=" + userVO +
             '}';
     }

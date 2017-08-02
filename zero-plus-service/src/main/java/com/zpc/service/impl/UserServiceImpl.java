@@ -1,6 +1,7 @@
 package com.zpc.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.zpc.common.dataobject.UserDO;
@@ -54,7 +55,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO queryUserByUserId(String userId) {
         UserDO userDO = userDao.selectUserByUserId(userId);
-        if(userDO==null){
+        if (userDO == null) {
             return null;
         }
         UserVO userVO = new UserVO();
@@ -78,6 +79,7 @@ public class UserServiceImpl implements UserService {
         if (existUserDO != null) {
             userDao.update(userDO);
         } else {
+            userDO.setJoinTime(new Date(System.currentTimeMillis()));
             userDao.insert(userDO);
         }
     }

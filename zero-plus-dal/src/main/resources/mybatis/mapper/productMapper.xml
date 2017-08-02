@@ -8,6 +8,7 @@
         <result column="user_id" property="userId"/>
         <result column="name" property="name"/>
         <result column="description" property="description"/>
+        <result column="picture_url" property="pictureUrl"/>
     </resultMap>
 
     <select id="selectProductsByUserId" parameterType="String" resultMap="ProductsMap">
