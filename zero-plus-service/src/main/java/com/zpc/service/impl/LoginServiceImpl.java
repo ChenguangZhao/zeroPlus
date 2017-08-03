@@ -71,6 +71,7 @@ public class LoginServiceImpl implements LoginService {
             userVO).toString());
         Cookie cookie = new Cookie(Keys.COOKIE_KEY, ciphertext);
         cookie.setPath("/");
+        cookie.setMaxAge(60*60);
         response.addCookie(cookie);
     }
 }
