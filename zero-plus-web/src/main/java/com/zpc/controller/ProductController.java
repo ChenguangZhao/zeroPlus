@@ -1,7 +1,10 @@
 package com.zpc.controller;
 
+import java.io.File;
+
 import com.zpc.common.result.AjaxResult;
 import com.zpc.common.vo.ProductsVO;
+import com.zpc.common.vo.UserVO;
 import com.zpc.service.ProductService;
 import com.zpc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,9 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
+
+    private final static String PATH
+        = "/Users/chenguang.zcg/IdeaProjects/zeroPlus/zero-plus-web/src/main/webapp/image/";
 
     /**
      * @return
@@ -50,8 +56,43 @@ public class ProductController {
     @RequestMapping("/uploadProductsImage.do")
     public AjaxResult uploadProductsImage(String callback, MultipartFile multipartFile) {
         try {
-            System.out.println(multipartFile.getOriginalFilename());
-            return AjaxResult.succResult(callback, "/innerApi/portrait/116284275884374341304");
+
+            if (!multipartFile.isEmpty()) {
+                String fileName = multipartFile.getOriginalFilename();
+                fileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
+                String filePath = PATH
+                    + fileName;
+
+                File file = new File(filePath);
+
+                multipartFile.transferTo(file);
+                return AjaxResult.succResult(callback, "/image/" + fileName);
+            }
+            return AjaxResult.errResult(callback, "上传失败");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return AjaxResult.errResult(callback, e.getMessage());
+        }
+    }
+
+    /**
+     * 删除图片
+     *
+     * @param callback
+     * @param url
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/deleteProductsImage.do")
+    public AjaxResult deleteProductsImage(String callback, String url) {
+        try {
+            String fileName = PATH + url.replace("/image/", "");
+            System.out.println(fileName);
+            File file = new File(fileName);
+            if (file.exists() && file.isFile()) {
+                file.delete();
+            }
+            return AjaxResult.succResult(callback);
         } catch (Exception e) {
             e.printStackTrace();
             return AjaxResult.errResult(callback, e.getMessage());
