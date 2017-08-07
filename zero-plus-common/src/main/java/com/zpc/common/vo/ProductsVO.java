@@ -17,6 +17,12 @@ public class ProductsVO {
 
     private String description;
 
+    private String information;
+
+    private Double price;
+
+    private Double favorablePrice;
+
     private String pictureUrl;
 
     private UserVO userVO;
@@ -53,12 +59,28 @@ public class ProductsVO {
         this.description = description;
     }
 
-    public UserVO getUserVO() {
-        return userVO;
+    public String getInformation() {
+        return information;
     }
 
-    public void setUserVO(UserVO userVO) {
-        this.userVO = userVO;
+    public void setInformation(String information) {
+        this.information = information;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public Double getFavorablePrice() {
+        return favorablePrice;
+    }
+
+    public void setFavorablePrice(Double favorablePrice) {
+        this.favorablePrice = favorablePrice;
     }
 
     public String getPictureUrl() {
@@ -69,6 +91,14 @@ public class ProductsVO {
         this.pictureUrl = pictureUrl;
     }
 
+    public UserVO getUserVO() {
+        return userVO;
+    }
+
+    public void setUserVO(UserVO userVO) {
+        this.userVO = userVO;
+    }
+
     @Override
     public String toString() {
         return "ProductsVO{" +
@@ -76,6 +106,9 @@ public class ProductsVO {
             ", userId='" + userId + '\'' +
             ", name='" + name + '\'' +
             ", description='" + description + '\'' +
+            ", information='" + information + '\'' +
+            ", price=" + price +
+            ", favorablePrice=" + favorablePrice +
             ", pictureUrl='" + pictureUrl + '\'' +
             ", userVO=" + userVO +
             '}';

@@ -60,12 +60,12 @@ public class ProductController {
             if (!multipartFile.isEmpty()) {
                 String fileName = multipartFile.getOriginalFilename();
                 fileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
-                String filePath = PATH
-                    + fileName;
+                //String filePath = PATH
+                //    + fileName;
 
-                File file = new File(filePath);
+                //File file = new File(filePath);
 
-                multipartFile.transferTo(file);
+                //multipartFile.transferTo(file);
                 return AjaxResult.succResult(callback, "/image/" + fileName);
             }
             return AjaxResult.errResult(callback, "上传失败");
@@ -87,11 +87,32 @@ public class ProductController {
     public AjaxResult deleteProductsImage(String callback, String url) {
         try {
             String fileName = PATH + url.replace("/image/", "");
-            System.out.println(fileName);
+
             File file = new File(fileName);
             if (file.exists() && file.isFile()) {
                 file.delete();
             }
+            return AjaxResult.succResult(callback);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return AjaxResult.errResult(callback, e.getMessage());
+        }
+    }
+
+    /**
+     * 新增产品
+     *
+     * @param callback
+     * @param productsVO
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/addProducts.do")
+    public AjaxResult addProducts(String callback, ProductsVO productsVO,
+                                  @RequestParam("imageUrlArray") String imageUrl) {
+        try {
+            System.out.println(productsVO.toString());
+            System.out.println(imageUrl);
             return AjaxResult.succResult(callback);
         } catch (Exception e) {
             e.printStackTrace();
