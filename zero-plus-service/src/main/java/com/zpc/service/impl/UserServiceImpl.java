@@ -83,4 +83,22 @@ public class UserServiceImpl implements UserService {
             userDao.insert(userDO);
         }
     }
+
+    /**
+     * 模糊查询
+     *
+     * @param key
+     * @return
+     */
+    @Override
+    public List<UserVO> searchUser(String key) {
+        List<UserDO> userDOS = userDao.search(key);
+        List<UserVO> userVOS = new ArrayList<UserVO>();
+        for (UserDO userDO : userDOS) {
+            UserVO userVO = new UserVO();
+            BeanUtils.copyProperties(userDO, userVO);
+            userVOS.add(userVO);
+        }
+        return userVOS;
+    }
 }

@@ -28,6 +28,14 @@
         select * from users where user_id=#{userId}
     </select>
 
+    <select id="search" parameterType="String" resultMap="UserMap">
+      select * from users where
+      username like CONCAT('%',#{key},'%')
+      or first_name like CONCAT('%',#{key},'%')
+      or last_name like CONCAT('%',#{key},'%')
+    </select>
+
+
     <update id="update" parameterType="com.zpc.common.dataobject.UserDO">
         update users set gmt_modified=now()
         <if test="portraitUrl!=null">

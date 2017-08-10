@@ -28,4 +28,10 @@ public interface UserService {
      * @param userVO
      */
     void save(UserVO userVO) throws ServiceException;
+
+    /**
+     * @param key
+     * @return
+     */
+    List<UserVO> searchUser(String key);
 }

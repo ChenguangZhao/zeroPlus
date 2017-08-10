@@ -3,6 +3,7 @@ package com.zpc.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -136,6 +137,25 @@ public class UserController {
             e.printStackTrace();
             return AjaxResult.errResult(callback, e.getMessage());
 
+        }
+    }
+
+    /**
+     * 模糊查询User
+     *
+     * @param callback
+     * @param key
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("searchUser.do")
+    public AjaxResult searchUser(String callback, String key) {
+        try {
+            List<UserVO> userVOList = userService.searchUser(key);
+            return AjaxResult.succResult(callback, userVOList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return AjaxResult.errResult(callback, e.getMessage());
         }
     }
 }

@@ -3,6 +3,7 @@ package com.zpc.dal;
 import java.util.List;
 
 import com.zpc.common.dataobject.UserDO;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -35,4 +36,10 @@ public interface UserDao {
      * @param userDO
      */
     void insert(UserDO userDO);
+
+    /**
+     * @param key
+     * @return
+     */
+    List<UserDO> search(@Param("key") String key);
 }
