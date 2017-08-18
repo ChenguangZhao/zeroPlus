@@ -53,9 +53,9 @@
         where user_id=#{userId}
     </update>
 
-    <insert id="insert" parameterType="com.zpc.common.dataobject.UserDO">
-        insert into users (username,user_id,portrait_url,email,gender,last_name,first_name,source_system,join_time)
-        VALUE
-        (#{username},#{userId},#{portraitUrl},#{email},#{gender},#{lastName},#{firstName},#{sourceSystem},#{joinTime})
-    </insert>
+    <!--<insert id="insert" parameterType="com.zpc.common.dataobject.UserDO">-->
+        <!--insert into users (username,user_id,portrait_url,email,gender,last_name,first_name,source_system,join_time)-->
+        <!--VALUE-->
+        <!--(#{username},#{userId},#{portraitUrl},#{email},#{gender},#{lastName},#{firstName},#{sourceSystem},#{joinTime})-->
+    <!--</insert>-->
 </mapper>

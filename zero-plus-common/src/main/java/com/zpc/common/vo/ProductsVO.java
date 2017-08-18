@@ -1,5 +1,7 @@
 package com.zpc.common.vo;
 
+import java.util.List;
+
 /**
  * @Title:
  * @Description:
@@ -23,7 +25,7 @@ public class ProductsVO {
 
     private Double favorablePrice;
 
-    private String pictureUrl;
+    private List<String> pictureUrl;
 
     private UserVO userVO;
 
@@ -83,11 +85,11 @@ public class ProductsVO {
         this.favorablePrice = favorablePrice;
     }
 
-    public String getPictureUrl() {
+    public List<String> getPictureUrl() {
         return pictureUrl;
     }
 
-    public void setPictureUrl(String pictureUrl) {
+    public void setPictureUrl(List<String> pictureUrl) {
         this.pictureUrl = pictureUrl;
     }
 
@@ -97,20 +99,5 @@ public class ProductsVO {
 
     public void setUserVO(UserVO userVO) {
         this.userVO = userVO;
-    }
-
-    @Override
-    public String toString() {
-        return "ProductsVO{" +
-            "id=" + id +
-            ", userId='" + userId + '\'' +
-            ", name='" + name + '\'' +
-            ", description='" + description + '\'' +
-            ", information='" + information + '\'' +
-            ", price=" + price +
-            ", favorablePrice=" + favorablePrice +
-            ", pictureUrl='" + pictureUrl + '\'' +
-            ", userVO=" + userVO +
-            '}';
     }
 }

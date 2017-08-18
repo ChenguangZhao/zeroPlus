@@ -40,6 +40,10 @@ public class AjaxResult {
         return new AjaxResult(callback, geneJSONObject(1, message, null));
     }
 
+    public static AjaxResult errResult(String callback, int errorCode, String message) {
+        return new AjaxResult(callback, geneJSONObject(errorCode, message, null));
+    }
+
     public static AjaxResult succResult(String callback) {
         return new AjaxResult(callback, geneJSONObject(0, "ok", null));
     }

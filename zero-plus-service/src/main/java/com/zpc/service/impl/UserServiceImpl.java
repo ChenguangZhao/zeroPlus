@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserVO> queryUser() {
         List<UserDO> userDOS = userDao.getAllUser();
-        List<UserVO> userVOS = new ArrayList<UserVO>();
+        List<UserVO> userVOS = new ArrayList<>();
         for (UserDO userDO : userDOS) {
             UserVO userVO = new UserVO();
             BeanUtils.copyProperties(userDO, userVO);
@@ -54,7 +54,10 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public UserVO queryUserByUserId(String userId) {
-        UserDO userDO = userDao.selectUserByUserId(userId);
+        UserDO condition = new UserDO();
+        condition.setUserId(userId);
+        condition.setIsDeleted(0);
+        UserDO userDO = userDao.selectOne(condition);
         if (userDO == null) {
             return null;
         }
@@ -74,13 +77,16 @@ public class UserServiceImpl implements UserService {
         UserDO userDO = new UserDO();
         BeanUtils.copyProperties(userVO, userDO);
 
-        UserDO existUserDO = userDao.selectUserByUserId(userVO.getUserId());
+        UserDO condition = new UserDO();
+        condition.setUserId(userDO.getUserId());
+        condition.setIsDeleted(0);
+        UserDO existUserDO = userDao.selectOne(condition);
 
         if (existUserDO != null) {
             userDao.update(userDO);
         } else {
             userDO.setJoinTime(new Date(System.currentTimeMillis()));
-            userDao.insert(userDO);
+            userDao.insertUseGeneratedKeys(userDO);
         }
     }
 
@@ -93,7 +99,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserVO> searchUser(String key) {
         List<UserDO> userDOS = userDao.search(key);
-        List<UserVO> userVOS = new ArrayList<UserVO>();
+        List<UserVO> userVOS = new ArrayList<>();
         for (UserDO userDO : userDOS) {
             UserVO userVO = new UserVO();
             BeanUtils.copyProperties(userDO, userVO);

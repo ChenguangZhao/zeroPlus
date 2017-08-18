@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
  * @date 2017/07/20
  */
 @Repository
-public interface UserDao {
+public interface UserDao extends BaseDao<UserDO>{
 
     /**
      * @return
@@ -32,10 +32,10 @@ public interface UserDao {
      */
     void update(UserDO userDO);
 
-    /**
-     * @param userDO
-     */
-    void insert(UserDO userDO);
+    ///**
+    // * @param userDO
+    // */
+    //int insert(UserDO userDO);
 
     /**
      * @param key

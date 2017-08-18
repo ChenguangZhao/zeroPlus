@@ -115,6 +115,7 @@ public class LoginController {
      * @param userVO
      */
     private UserVO checkUer(UserVO userVO) throws ServiceException {
+
         UserVO existUserVO = userService.queryUserByUserId(userVO.getUserId());
         if (existUserVO == null) {
             //新用户登录

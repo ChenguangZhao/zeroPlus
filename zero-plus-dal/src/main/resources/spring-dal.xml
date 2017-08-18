@@ -32,9 +32,14 @@
         <property name="mapperLocations" value="classpath:/mybatis/mapper/*.xml"/>
     </bean>
     <!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口-->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.zpc.dal"/>
-    </bean>
+    <!--<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--<property name="basePackage" value="com.zpc.dal"/>-->
 
+    <!--</bean>-->
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer"
+          p:basePackage="com.zpc.dal"
+          p:sqlSessionFactoryBeanName="sqlSessionFactory"
+          p:annotationClass="org.springframework.stereotype.Repository"
+          p:properties="mappers=com.zpc.dal.BaseDao"/>
 
 </beans>

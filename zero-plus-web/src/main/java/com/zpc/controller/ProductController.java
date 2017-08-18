@@ -1,6 +1,9 @@
 package com.zpc.controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import com.zpc.common.result.AjaxResult;
 import com.zpc.common.vo.ProductsVO;
@@ -60,12 +63,12 @@ public class ProductController {
             if (!multipartFile.isEmpty()) {
                 String fileName = multipartFile.getOriginalFilename();
                 fileName = System.currentTimeMillis() + "." + fileName.substring(fileName.lastIndexOf(".") + 1);
-                //String filePath = PATH
-                //    + fileName;
+                String filePath = PATH
+                    + fileName;
 
-                //File file = new File(filePath);
+                File file = new File(filePath);
 
-                //multipartFile.transferTo(file);
+                multipartFile.transferTo(file);
                 return AjaxResult.succResult(callback, "/image/" + fileName);
             }
             return AjaxResult.errResult(callback, "上传失败");
@@ -111,8 +114,11 @@ public class ProductController {
     public AjaxResult addProducts(String callback, ProductsVO productsVO,
                                   @RequestParam("imageUrlArray") String imageUrl) {
         try {
-            System.out.println(productsVO.toString());
-            System.out.println(imageUrl);
+            List<String> imageUrlList = Arrays.asList(imageUrl.split(","));
+            System.out.println(imageUrlList);
+            productsVO.setPictureUrl(imageUrlList);
+            System.out.println(productsVO);
+
             return AjaxResult.succResult(callback);
         } catch (Exception e) {
             e.printStackTrace();
